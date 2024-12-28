@@ -41,4 +41,12 @@ export class InventoryController {
       data: item,
     });
   });
+
+  deleteItem = asyncHandler(async (req: Request, res: Response) => {
+    await this.service.deleteItem(req.params.id);
+    res.status(200).json({
+      success: true,
+      message: "Item deleted successfully",
+    });
+  });
 }

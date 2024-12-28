@@ -20,4 +20,8 @@ export class InventoryRepository {
   ): Promise<IInventoryItem | null> {
     return await InventoryModel.findByIdAndUpdate(id, item, { new: true });
   }
+
+  async delete(id: string): Promise<IInventoryItem | null> {
+    return await InventoryModel.findByIdAndDelete(id);
+  }
 }

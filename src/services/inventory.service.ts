@@ -49,4 +49,9 @@ export class InventoryService {
     if (!updatedItem) throw new NotFoundError("Item not found");
     return updatedItem;
   }
+
+  async deleteItem(id: string): Promise<void> {
+    const deletedItem = await this.repository.delete(id);
+    if (!deletedItem) throw new NotFoundError("Item not found");
+  }
 }
