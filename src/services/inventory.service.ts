@@ -28,4 +28,8 @@ export class InventoryService {
       throw new ValidationError("Category is required");
     }
   }
+
+  async getAllItems(): Promise<IInventoryItem[]> {
+    return await this.repository.findAll();
+  }
 }

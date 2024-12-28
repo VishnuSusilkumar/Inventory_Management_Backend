@@ -5,5 +5,6 @@ const router = express.Router();
 const controller = new InventoryController();
 
 router.post("/", controller.createItem);
+router.get("/", controller.getAllItems);
 
 export default router;
