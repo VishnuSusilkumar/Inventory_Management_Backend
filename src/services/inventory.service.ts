@@ -40,4 +40,13 @@ export class InventoryService {
     }
     return item;
   }
+
+  async updateItem(
+    id: string,
+    item: Partial<IInventoryItem>
+  ): Promise<IInventoryItem> {
+    const updatedItem = await this.repository.update(id, item);
+    if (!updatedItem) throw new NotFoundError("Item not found");
+    return updatedItem;
+  }
 }

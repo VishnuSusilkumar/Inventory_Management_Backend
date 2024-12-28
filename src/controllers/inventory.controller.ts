@@ -33,4 +33,12 @@ export class InventoryController {
       data: item,
     });
   });
+
+  updateItem = asyncHandler(async (req: Request, res: Response) => {
+    const item = await this.service.updateItem(req.params.id, req.body);
+    res.status(200).json({
+      success: true,
+      data: item,
+    });
+  });
 }

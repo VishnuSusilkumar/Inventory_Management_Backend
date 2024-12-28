@@ -13,4 +13,11 @@ export class InventoryRepository {
   async findById(id: string): Promise<IInventoryItem | null> {
     return await InventoryModel.findById(id);
   }
+
+  async update(
+    id: string,
+    item: Partial<IInventoryItem>
+  ): Promise<IInventoryItem | null> {
+    return await InventoryModel.findByIdAndUpdate(id, item, { new: true });
+  }
 }
