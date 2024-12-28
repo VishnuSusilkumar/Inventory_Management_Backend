@@ -7,6 +7,10 @@ export class InventoryRepository {
   }
 
   async findAll(): Promise<IInventoryItem[]> {
-    return await InventoryModel.find().sort({ createdAt: -1 }); 
+    return await InventoryModel.find().sort({ createdAt: -1 });
+  }
+
+  async findById(id: string): Promise<IInventoryItem | null> {
+    return await InventoryModel.findById(id);
   }
 }

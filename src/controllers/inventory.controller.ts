@@ -24,4 +24,13 @@ export class InventoryController {
       data: items,
     });
   });
+
+  getItemById = asyncHandler(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const item = await this.service.getItemById(id);
+    res.status(200).json({
+      success: true,
+      data: item,
+    });
+  });
 }

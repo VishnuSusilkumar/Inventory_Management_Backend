@@ -1,6 +1,6 @@
 import { IInventoryItem } from "../types/inventory.types";
 import { InventoryRepository } from "../repositories/inventory.repository";
-import { ValidationError } from "../utils/error";
+import { ValidationError, NotFoundError } from "../utils/error";
 
 export class InventoryService {
   private repository: InventoryRepository;
@@ -31,5 +31,13 @@ export class InventoryService {
 
   async getAllItems(): Promise<IInventoryItem[]> {
     return await this.repository.findAll();
+  }
+
+  async getItemById(id: string): Promise<IInventoryItem> {
+    const item = await this.repository.findById(id);
+    if (!item) {
+      throw new NotFoundError("Item not found");
+    }
+    return item;
   }
 }
