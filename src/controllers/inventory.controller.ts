@@ -1,14 +1,12 @@
 import { Request, Response } from "express";
-import { InventoryService } from "../services/inventory.service";
-import { InventoryRepository } from "../repositories/inventory.repository";
 import { asyncHandler } from "../utils/asyncHandler";
+import { IInventoryService } from "../interfaces/IInventoryService";
 
 export class InventoryController {
-  private service: InventoryService;
+  private service: IInventoryService;
 
-  constructor() {
-    const repository = new InventoryRepository();
-    this.service = new InventoryService(repository);
+  constructor(service: IInventoryService) {
+    this.service = service;
   }
 
   createItem = asyncHandler(async (req: Request, res: Response) => {
