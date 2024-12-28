@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ValidationError } from "../utils/error";
+import { ValidationError, NotFoundError } from "../utils/error";
 
 export const errorHandler = (
   err: Error,
@@ -10,6 +10,10 @@ export const errorHandler = (
   console.error(err);
 
   if (err instanceof ValidationError) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+
+  if (err instanceof NotFoundError) {
     return res.status(400).json({ success: false, error: err.message });
   }
 
