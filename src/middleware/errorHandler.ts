@@ -6,18 +6,16 @@ export const errorHandler = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   console.error(err);
 
   if (err instanceof ValidationError) {
-    return res.status(400).json({ success: false, error: err.message });
+    res.status(400).json({ success: false, error: err.message });
   }
 
   if (err instanceof NotFoundError) {
-    return res.status(400).json({ success: false, error: err.message });
+    res.status(400).json({ success: false, error: err.message });
   }
 
-  return res
-    .status(500)
-    .json({ success: false, error: "Internal server error" });
+  res.status(500).json({ success: false, error: "Internal server error" });
 };

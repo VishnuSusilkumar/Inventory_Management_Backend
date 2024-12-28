@@ -2,6 +2,7 @@ import express from "express";
 import { connectDatabase } from "./config/database";
 import dotenv from "dotenv";
 import inventoryRoutes from './routes/inventory.routes';
+import { errorHandler } from "./middleware/errorHandler";
 
 dotenv.config();
 
@@ -12,6 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/items', inventoryRoutes);
 
 connectDatabase();
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
