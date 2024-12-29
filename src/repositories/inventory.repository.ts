@@ -15,6 +15,10 @@ export class InventoryRepository implements IInventoryRepository {
     return await InventoryModel.findById(id);
   }
 
+  async findByName(itemName: string): Promise<IInventoryItem | null> {
+    return await InventoryModel.findOne({ itemName });
+  }
+
   async update(
     id: string,
     item: Partial<IInventoryItem>
