@@ -16,7 +16,8 @@ export class InventoryRepository implements IInventoryRepository {
   }
 
   async findByName(itemName: string): Promise<IInventoryItem | null> {
-    return await InventoryModel.findOne({ itemName });
+    const regex = new RegExp(`^${itemName}$`, "i");
+    return await InventoryModel.findOne({ itemName: { $regex: regex } });
   }
 
   async update(
